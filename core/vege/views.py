@@ -1,13 +1,14 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from .models import receipe
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login
 
 from django.contrib import messages
 def reciepes(request):
     if request.method == "POST":
         data = request.POST
-        receipe_id = data.get("receipe.id")
+        receipe_id = data.get("receipe_id")
         receipe_name = data.get("receipe_name")
         receipe_decription = data.get("receipe_decription")
         receipe_image = data.get("receipe_image")
@@ -40,7 +41,7 @@ def update_receipe(request,id):
 
         query_set.receipe_name = receipe_name
         query_set.receipe_decription = receipe_decription
-        query_set.receipe_name = receipe_name
+        query_set.receipe_image = receipe_image
 
         query_set.save()
         return redirect("/reciepes/")
@@ -48,8 +49,32 @@ def update_receipe(request,id):
     context = {"receipe":query_set}
     return render(request,"update_receipe.html",context)
 
+ 
+
 def login_page(request):
-    return render(request,'login.html')
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        
+        
+        
+        if not User.objects.filter(username=username).exists():
+            messages.info(request, 'Invalid username!')
+            print("invalied")
+            return redirect("/login/")
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is None:
+            messages.info(request, 'Invalid Password!')
+            return render(request, 'login.html')
+        else:
+            login(request, user)
+            return redirect("/reciepes/")  
+    return render(request, 'login.html')   
+
+
+    
 
 def register(request):
     if request.method == "POST":
