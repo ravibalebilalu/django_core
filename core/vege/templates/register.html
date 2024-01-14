@@ -5,33 +5,51 @@
 
     <h1>Register</h1>
 
- 
-     
-
     <div class="mt-5">
-        <div class="mx-auto col-6">
-             
-            <div class="mb-3">
-                <label for="formGroupExampleInput" class="form-label">User Name</label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="">
-              </div>
-              <div class="mb-3">
-                <label for="formGroupExampleInput2" class="form-label">Password</label>
-                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
-                <button type="submit" class="btn btn-primary">Login</button>
-              </div> 
+        <form method="post" action="{% url 'register' %}">
+            
+            
+            
+            {% csrf_token %}
 
-                  <p> Have an account?</p>
-                  <p><a href="/login/">Login</a></p>
-         
+            {% if messages %}
              
-        </div>
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 
+
+            <div class="mx-auto col-6">
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">First Name</label>
+                    <input type="text" class="form-control" name="first_name" id="formGroupExampleInput" placeholder="">
+                </div>
+
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label"> Last Name</label>
+                    <input type="text" class="form-control" name="last_name" id="formGroupExampleInput" placeholder="">
+                </div>
+
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">User Name</label>
+                    <input type="text" class="form-control" name="user_name" id="formGroupExampleInput" placeholder="">
+                </div>
+
+                <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Password</label>
+                    <input type="text" class="form-control" name="password" id="formGroupExampleInput2" placeholder="">
+                    <br>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div> 
+            </div>
+        </form>
+
+        <p> Have an account?</p>
+        <p><a href="/login/">Login</a></p>
     </div>
 </div>
-
-</div>
-
-
 
 {% endblock %}
