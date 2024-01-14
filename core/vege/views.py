@@ -13,6 +13,10 @@ def reciepes(request):
         receipe.objects.create(id=receipe_id,receipe_name=receipe_name,receipe_decription=receipe_decription,receipe_image=receipe_image)
      
     query_set = receipe.objects.all()
+
+    if request.GET.get('search'):
+        query_set = query_set.filter(receipe_name__icontains = request.GET.get('search'))
+
     context = {"receipe":query_set}
     return render(request,'reciepes.html',context)
 
@@ -41,3 +45,9 @@ def update_receipe(request,id):
 
     context = {"receipe":query_set}
     return render(request,"update_receipe.html",context)
+
+def login_page(request):
+    return render(request,'login.html')
+
+def register(request):
+    return render(request,'register.html')
