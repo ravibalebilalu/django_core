@@ -23,6 +23,7 @@ urlpatterns = [
     path("",home,name= "home"),
     path("reciepes/",reciepes,name = "reciepes"),
     path("delete_receipe/<id>/",delete_receipe,name = "delete_receipe"),
+    path("update_receipe/<id>/",update_receipe,name = "update_receipe"),
     path('about/',about,name= 'about'),
     path('contact/',contact,name='contact'),
     path('admin/', admin.site.urls),

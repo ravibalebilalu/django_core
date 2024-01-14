@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block start %}
+
+<div class="container mt-5">
+    
+    <h1>Update Recipe</h1>
+    
+    <form class="col-6 mx-auto mb-3 card p-3 shadow-lg" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Recipe Name</label>
+            <input  name="receipe_name" value="{{receipe.receipe_name}}" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label  for="exampleInputPassword1" class="form-label">Recipe Description</label>
+            <textarea name="receipe_decription" value="" class="form-control">{{receipe.receipe_decription}}</textarea>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Url </label>
+            <textarea name="receipe_image" value=""  class="form-control">{{receipe.receipe_image}}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Update</button>
+        
+    </form>
+</div>
+  
+
+ 
+{% endblock %}
