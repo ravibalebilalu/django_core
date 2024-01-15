@@ -2,9 +2,11 @@ from django.shortcuts import render,redirect,HttpResponse
 from .models import receipe
 from django.http import HttpResponse
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 
 from django.contrib import messages
+@login_required(login_url = "/login/")
 def reciepes(request):
     if request.method == "POST":
         data = request.POST
@@ -22,13 +24,13 @@ def reciepes(request):
 
     context = {"receipe":query_set}
     return render(request,'reciepes.html',context)
-
+@login_required(login_url = "/login/")
 def delete_receipe(request,id):
     query_set = receipe.objects.get(id = id)
     query_set.delete()
     return redirect("/reciepes/")
 
-
+@login_required(login_url = "/login/")
 def update_receipe(request,id):
     query_set = receipe.objects.get(id = id)
 
@@ -53,35 +55,36 @@ def update_receipe(request,id):
 
 def login_page(request):
     if request.method == "POST":
-        username = request.POST.get("username")
-        password = request.POST.get("password")
-        
-        
+        username = request.POST.get("username").strip()
+        password = request.POST.get("password").strip()
         
         if not User.objects.filter(username=username).exists():
             messages.info(request, 'Invalid username!')
-            print("invalied")
+            
             return redirect("/login/")
 
-        user = authenticate(request, username=username, password=password)
+        user = authenticate( username=username, password=password)
+         
 
         if user is None:
             messages.info(request, 'Invalid Password!')
             return render(request, 'login.html')
         else:
             login(request, user)
-            return redirect("/reciepes/")  
+            return redirect("reciepes")  
     return render(request, 'login.html')   
 
-
+def log_out(request):
+    logout(request)
+    return redirect('/login/')
     
 
 def register(request):
     if request.method == "POST":
-        first_name = request.POST.get("first_name")
-        last_name = request.POST.get("last_name")
-        username = request.POST.get("user_name")
-        password = request.POST.get("password")
+        first_name = request.POST.get("first_name").strip()
+        last_name = request.POST.get("last_name").strip()
+        username = request.POST.get("user_name").strip()
+        password = request.POST.get("password").strip()
         user = User.objects.filter(username=username)
         if user.exists():
             messages.info(request,'username is already taken')

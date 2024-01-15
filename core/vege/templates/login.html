@@ -2,8 +2,8 @@
 {% block start %}
 
 <div class="container mt-5">
-
-    <h1>Login</h1>
+    <h2 style="text-align: center;">Reciepes Paradase</h2>
+    <h3 style="text-align: center;">Login</h3>
     <form method="post"> <!-- Added method="post" here -->
         {% csrf_token %}
         {% if messages %}
@@ -14,26 +14,29 @@
             </ul>
         {% endif %}
         
-        <div class="mt-5">
-            <div class="mx-auto col-6">
+        <div class="col sm-col-10">
+            <div class="col sm-col-10">
                  
-                <div class="mb-3">
+                <div class="col sm-col-10">
                     <label for="formGroupExampleInput" class="form-label">User Name</label>
                     <input type="text" name="username" class="form-control" id="formGroupExampleInput" placeholder="">
                 </div>
-                <div class="mb-3">
+                <div class="col sm-col-10">
                     <label for="formGroupExampleInput2" class="form-label">Password</label>
                     <input type="password" name="password" class="form-control" id="formGroupExampleInput2" placeholder="">
                     <br>
-                    <button type="submit" class="btn btn-primary">Login</button>
-                </div> 
-                 
+                    <div style="text-align: center;">
+                    <button   type="submit" class="btn btn-primary">Login</button>
+                </div>
+                </div > <br>
+                <div style="text-align:center;">
                 <p>Dont Have an account?</p> 
                 <a href="/register/">Create an Account!</a>
+            </div> 
             </div>
         </div>
     </form> <!-- Added closing form tag -->
 
 </div>
-
+ 
 {% endblock %}
