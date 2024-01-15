@@ -7,30 +7,38 @@
     <p>All You need is :</p>
     <p>Receipe name,Description and an url of receipe image!</p>
     
-    <form class="col-6 mx-auto mb-3 card p-3 shadow-lg" method="post">
+    <form class="col sm-col-10" method="post">
         {% csrf_token %}
         <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">Recipe Name</label>
             <input  name="receipe_name" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
         </div>
-        <div class="mb-3">
+        <div class="col sm-col-10">
             <label  for="exampleInputPassword1" class="form-label">Recipe Description</label>
             <textarea name="receipe_decription"  class="form-control"></textarea>
         </div>
-        <div class="mb-3">
+        <br>
+        <div class="col sm-col-10">
             <label for="exampleInputPassword1" class="form-label">Url </label>
             <textarea name="receipe_image"  class="form-control"></textarea>
-        </div>
+        
+        </div >
+        <br>
+        <div  style="text-align: center;">
         <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
     </form>
 
-        <div class="mt-5">
+        <div  style="text-align: center;">
           <div class="mx-auto col-6">
+
+            <br><br>
             <form>
             <div class="mb-3">
               
-              <label for="exampleInputEmail1" class="form-label">Search Receipe </label>
+              <label for="exampleInputEmail1" class="form-label"><h4>Search Receipe</h4> </label>
               <input  name="search"   type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+              <br>
               <button type="submit" class="btn btn-primary">Search</button>
             </form>
           </div>

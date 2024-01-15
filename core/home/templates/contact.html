@@ -1,7 +1,23 @@
- {% extends 'base.html' %}
- {% block start %}
-    <h1> Contact</h1>
-    <a href="/"><- Home</a>
+
+{% extends 'base.html'  %}
+{% block start %}
+
+     
+
+     <h1 style="text-align: center;">RECEIPES COLLECTIONS</h1>
+     <br><br>
+ 
+      <div style="text-align: center;"> 
+
+         <h6>Contact number : </h6>
+         <h6>Email : </h6>
+
+     <a class="btn btn-primary" href="/" role="button">Home</a>
+     <a class="btn btn-primary" href="/about/" role="button">About</a>
+    </div>
     <br>
-    <a href="/about/"><-About</a>
+    <div style="text-align: center;">
+      <a class="btn btn-success" href="/login/" role="button">Login</a>
+   </div>
+      
  {% endblock %}
